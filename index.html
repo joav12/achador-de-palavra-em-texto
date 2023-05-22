@@ -11,9 +11,11 @@
         <h1>Analisador de Texto</h1>
         <p>Coloque abaixo um texto e a palavra que você queira. Eu lhe falarei quantas vezes essa palavra se repete no texto</p>
 
-        <input type="text" id="inputTexto" placeholder="Insira o seu texto aqui">
+        <div>
+           <textarea name="texto" id="inputTexto" cols="100" rows="15"></textarea>
 
-        <input type="text" id="input-keyword" placeholder="Insira uma palavra-chave...">
+            <input type="text" id="input-keyword" placeholder="Insira uma palavra-chave..."> 
+        </div>
 
         <button id="analyze-button">Analisar</button>
         <h4 id="result"></h4>

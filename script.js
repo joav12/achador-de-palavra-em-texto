@@ -1,56 +1,68 @@
 const resul = document.getElementById("result");
 const botao = document.getElementById("analyze-button")
 
-const achaPalavra = [{numero: null}]
+const achaPalavra = []
 n = -1
 
 
 class textAnalizer {
     
     constructor() {
-        this.texto = null;
+        this.texto = "";
     }
 
-    
-    analizar(){
+    click(){
+        n = 0
+        const achaPalavra = []
+
         this.texto = document.getElementById("inputTexto").value
         const palavraChave = document.getElementById("input-keyword");
 
-        const palavraChaveSC = palavraChave.toLowerCase
+        const palavraChaveSC = palavraChave.value.toLowerCase()
         const textoSC = this.texto.toLowerCase()
-
         const localDaPalavra = textoSC.indexOf(palavraChaveSC)
 
-        //Verifica se tem repetições no array
-        function verificaArray(array){
-            if(array.length !== new Set(array).size){
-                return true
-            }
-
-            return false
-        }
-
-        if (palavraChave.value == "") {
-            resul.innerHTML = `<h3>Por favor insira uma palavra chave</h3>`
-        }
-
-        else {
-            n += 1
-
-            achaPalavra.push(textoSC.indexOf(palavraChaveSC, (localDaPalavra + n)))
-
+        analizar()
+       function analizar(){
     
-
-           if(verificaArray = true){
-            resul.innerHTML = `A palavra ${palavraChave.value} foi repetida ${achaPalavra.length} vezes`
-
-           } else{
-                this.analizar()
-           }
-        }
+            //Verifica se tem repetições no array
+            function verificaArray(){
+                if(achaPalavra.length !== new Set(achaPalavra).size){
+                    return true
+                }
+    
+                return false
+            }
+    
+            if (palavraChave.value == "") {
+                resul.innerHTML = `Por favor insira uma palavra chave`
+    
+            } else if(localDaPalavra == -1){
+                resul.innerHTML = `Essa palavra não existe nesse texto`
+    
+            } else {
+                n += 1
+    
+                //Adiciona a posição das palavras no array
+                adicionaArry()
+                function adicionaArry() {
+                    return textoSC.split(palavraChaveSC, n).join(palavraChaveSC).length
+                }
+                achaPalavra.push(adicionaArry())
+    
+               if(verificaArray() == true){
+                resul.innerHTML = `A palavra "${palavraChave.value}" foi repetida ${achaPalavra.length - 2} vezes`
+   
+                console.log(achaPalavra)
+    
+               } else{
+                    analizar()
+               }
+            }
+        }   
     }
 }
 
 const analizador = new textAnalizer 
 
-botao.addEventListener ('click', function(){analizador.analizar()}) 
+botao.addEventListener ('click', function(){analizador.click()}) 
